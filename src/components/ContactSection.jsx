@@ -1,33 +1,56 @@
 import {
-    Instagram,
     Linkedin,
     Mail,
     MapPin,
     Phone,
     Send,
-    Twitch,
-    Twitter,
+    Github
   } from "lucide-react";
   import { cn } from "@/lib/utils";
   import { useToast } from "@/hooks/use-toast";
-  import { useState } from "react";
+  import { useState, useRef } from "react";
+  import emailjs from "@emailjs/browser";
   
   export const ContactSection = () => {
+    const formRef = useRef(null);
     const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-  
       setIsSubmitting(true);
   
-      setTimeout(() => {
+      try {
+        // 1) Send notification to site owner
+        await emailjs.sendForm(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_NOTIFY_TEMPLATE_ID,
+          formRef.current,
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        );
+  
+        // 2) Send auto-reply to visitor
+        await emailjs.sendForm(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID,
+          formRef.current,
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        );
+  
         toast({
           title: "Message sent!",
-          description: "Thank you for your message. I'll get back to you soon.",
+          description: "Thanks for reaching out! I'll get back to you soon.",
         });
+      } catch (error) {
+        console.error(error);
+        toast({
+          variant: "destructive",
+          title: "Uh-oh, something failed",
+          description: "Please try again later.",
+        });
+      } finally {
         setIsSubmitting(false);
-      }, 1500);
+      }
     };
     return (
       <section id="contact" className="py-24 px-4 relative bg-secondary/30">
@@ -93,20 +116,20 @@ import {
               <div className="pt-8">
                 <h4 className="font-medium mb-4"> Connect With Me</h4>
                 <div className="flex space-x-4 justify-center">
-                  <a href="#" target="_blank">
+                  <a href="https://www.linkedin.com/in/colinprice04" target="_blank">
                     <Linkedin />
                   </a>
-                  <a href="#" target="_blank">
-                    <Instagram />
+                  <a href="https://github.com/cjprice2" target="_blank">
+                    <Github />
                   </a>
                 </div>
               </div>
             </div>
   
-            <div className="glass-card" onSubmit={handleSubmit}>
+            <div className="glass-card">
               <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
   
-              <form className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label
                     htmlFor="name"

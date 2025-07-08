@@ -22,8 +22,8 @@ export const HeroSection = () => {
             </span>
           </h1>
 
-          <p className="text-lg text-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-delay-3">
-            Computer Science and Data Science student at the University of Wisconsin–Madison interested in frontend design, graphics, and data-driven experiences.
+          <p className="text-lg text-foreground max-w-3xl mx-auto opacity-0 animate-fade-in-delay-3">
+            A Computer Science and Data Science student at the University of Wisconsin–Madison interested in frontend design, graphics, and data-driven experiences.
           </p>
 
           <div className="pt-4 opacity-0 animate-fade-in-delay-4">

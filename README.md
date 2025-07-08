@@ -1,12 +1,55 @@
-# React + Vite
+# Colin Price – Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, single-page portfolio built with **React**, **Vite**, and **Tailwind CSS**. It showcases my projects, skills, and lets visitors contact me via **EmailJS** all without a backend.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Single-page application** with instant navigation
+- **Light / Dark theme** toggle
+- **Glassmorphism UI** components
+- **Toast notifications** powered by Radix UI
+- **EmailJS integration** sends me a message and auto-replies to the visitor
+- **Responsive & accessible** design
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Tech Stack
+
+| Purpose | Library / Tool |
+|---------|----------------|
+| Framework & Build | React 19, Vite 7 |
+| Styling | Tailwind CSS 4 |
+| UI Primitives | @radix-ui/react-toast |
+| Icons | Lucide-React |
+| Email | @emailjs/browser |
+| Linting | ESLint 9 |
+
+---
+
+## Quick Start
+
+```bash
+# Install dependencies
+yarn   # or npm install / pnpm install
+
+# (Optional) enable contact form – copy env template, only needed for EmailJS keys
+# Site renders fine without them, the form will just show an error toast.
+cp .env.example .env
+
+# Run the dev server (http://localhost:5173)
+npm run dev
+```
+
+## License & Credits
+
+Released under the **MIT License** – fork, adapt, and enjoy.
+
+Built with:
+- [Radix UI](https://www.radix-ui.com/) toast primitives
+- [Tailwind CSS](https://tailwindcss.com/) utility-first styling
+- [Lucide](https://lucide.dev/) icons
+- [EmailJS](https://www.emailjs.com/) serverless email
+
+Special thanks to [PedroTech](https://www.youtube.com/@PedroTechnologies) for his [Beautiful React Tailwind Portfolio Website Tutorial](https://www.youtube.com/watch?v=ifOJ0R5UQOc). Here is the accompanying [GitHub repository](https://github.com/machadop1407/beautiful-react-tailwind-portfolio). My site's architecture was influenced by his example, but I made numerous design and code tweaks to match my own style and requirements. 

@@ -7,8 +7,8 @@ const projects = [
     description: "A portfolio of my web graphics projects from my computer graphics class.",
     image: "/projects/project1.png",
     tags: ["Canvas API", "Three.js", "WebGL", "SVG"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://cjprice2.github.io/graphics-portfolio/",
+    githubUrl: "https://github.com/cjprice2/graphics-portfolio",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const projects = [
     image: "/projects/project2.png",
     tags: ["Java", "JavaFX"],
     demoUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/cjprice2/ActorShortestPathApp",
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const projects = [
     image: "/projects/project3.png",
     tags: ["React", "Vite", "Tailwind CSS", "Canvas API"],
     demoUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/cjprice2/cjprice2.github.io",
   },
 ];
 
@@ -50,7 +50,7 @@ export const ProjectsSection = () => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group glass-card card-hover overflow-hidden"
+              className="group glass-card card-hover overflow-hidden cursor-pointer"
             >
               <div className="h-60 overflow-hidden">
                 <img
@@ -78,17 +78,21 @@ export const ProjectsSection = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <div className="flex space-x-3">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
+                    {project.id !== 2 && project.id !== 3 && project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ExternalLink size={20} />
+                      </a>
+                    )}
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <Github size={20} />
                     </a>
