@@ -244,7 +244,10 @@ export const NetworkBackground = () => {
       if (!lastTimeRef.current) {
         lastTimeRef.current = currentTime;          // initialise on first frame
       }
-      const deltaTime = (currentTime - lastTimeRef.current) / 1000; // seconds
+      // Seconds elapsed; clamp to avoid huge jumps when tab is inactive (RAF throttles)
+      let deltaTime = (currentTime - lastTimeRef.current) / 1000;
+      const MAX_DELTA = 0.05; // cap at ~50 ms (≈20 fps). Larger gaps are treated as MAX_DELTA
+      if (deltaTime > MAX_DELTA) deltaTime = MAX_DELTA;
       lastTimeRef.current = currentTime;
 
       updateNodes(deltaTime);
