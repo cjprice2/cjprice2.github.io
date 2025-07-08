@@ -51,10 +51,10 @@
 
 @layer base {
   :root {
-    --background: 255 90% 100%;
+    --background: 0 0% 96%;
     --foreground: 0 0% 0%;
     
-    --card: 0 0% 100%;
+    --card: 0 0% 98%;
 
     --primary: 220 40% 60%;
     --primary-foreground: 0 0% 100%;

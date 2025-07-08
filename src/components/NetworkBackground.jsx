@@ -5,6 +5,7 @@ export const NetworkBackground = () => {
   const [isDark, setIsDark] = useState(false);
   const nodesRef = useRef([]);
   const animationRef = useRef();
+  const lastTimeRef = useRef(0);
 
   useEffect(() => {
     // Check theme
@@ -38,39 +39,39 @@ export const NetworkBackground = () => {
         if (width >= 3840) {
           // 4K+ displays: Need more nodes but not too dense
           const connectionDistance = screenDiagonal * 0.08;
-          return { nodeCount: 130, connectionDistance, velocity: 0.25 };
+          return { nodeCount: 170, connectionDistance, velocity: 0.25 };
         } else if (width >= 2560) {
           // 1440p+ displays
           const connectionDistance = screenDiagonal * 0.08;
-          return { nodeCount: 120, connectionDistance, velocity: 0.25 };
+          return { nodeCount: 150, connectionDistance, velocity: 0.25 };
         } else if (width >= 1920) {
           // 1080p displays: Our baseline for visual density
           const connectionDistance = screenDiagonal * 0.08;
-          return { nodeCount: 110, connectionDistance, velocity: 0.25 };
+          return { nodeCount: 140, connectionDistance, velocity: 0.25 };
         } else if (width >= 1680) {
           // Large laptop displays
           const connectionDistance = screenDiagonal * 0.08;
-          return { nodeCount: 100, connectionDistance, velocity: 0.25 };
+          return { nodeCount: 120, connectionDistance, velocity: 0.25 };
         } else if (width >= 1366) {
           // Common laptop resolution
           const connectionDistance = screenDiagonal * 0.09;
-          return { nodeCount: 90, connectionDistance, velocity: 0.25 };
+          return { nodeCount: 100, connectionDistance, velocity: 0.25 };
         } else if (width >= 1024) {
           // Tablet landscape
           const connectionDistance = screenDiagonal * 0.11;
-          return { nodeCount: 50, connectionDistance, velocity: 0.25 };
+          return { nodeCount: 80, connectionDistance, velocity: 0.25 };
         } else if (width >= 768) {
           // Tablet portrait
           const connectionDistance = screenDiagonal * 0.125;
-          return { nodeCount: 40, connectionDistance, velocity: 0.25 };
+          return { nodeCount: 60, connectionDistance, velocity: 0.25 };
         } else if (width >= 640) {
           // Large mobile
           const connectionDistance = screenDiagonal * 0.15;
-          return { nodeCount: 35, connectionDistance, velocity: 0.25 };
+          return { nodeCount: 50, connectionDistance, velocity: 0.25 };
         } else {
           // Small mobile screens
           const connectionDistance = screenDiagonal * 0.2;
-          return { nodeCount: 25, connectionDistance, velocity: 0.25 };
+          return { nodeCount: 30, connectionDistance, velocity: 0.25 };
         }
      };
 
@@ -137,8 +138,9 @@ export const NetworkBackground = () => {
     };
 
     // Update node positions
-    const updateNodes = () => {
+    const updateNodes = (deltaTime) => {
       const nodes = nodesRef.current;
+      const frameScale = deltaTime * 144;
       
       // Check for nodes that are too close and make them go opposite directions
       for (let i = 0; i < nodes.length; i++) {
@@ -181,9 +183,9 @@ export const NetworkBackground = () => {
       }
       
       nodes.forEach(node => {
-        // Update position
-        node.x += node.vx;
-        node.y += node.vy;
+        // Update position – scale by elapsed time
+        node.x += node.vx * frameScale;
+        node.y += node.vy * frameScale;
         
         // Bounce off edges
         if (node.x <= 0 || node.x >= canvas.width) {
@@ -237,15 +239,22 @@ export const NetworkBackground = () => {
       });
     };
 
-    // Animation loop
-    const animate = () => {
-      updateNodes();
+    // Animation loop (frame-rate independent)
+    const animate = (currentTime) => {
+      if (!lastTimeRef.current) {
+        lastTimeRef.current = currentTime;          // initialise on first frame
+      }
+      const deltaTime = (currentTime - lastTimeRef.current) / 1000; // seconds
+      lastTimeRef.current = currentTime;
+
+      updateNodes(deltaTime);
       draw();
       animationRef.current = requestAnimationFrame(animate);
     };
 
     resizeCanvas();
-    animate();
+    lastTimeRef.current = performance.now();        // seed timer
+    animationRef.current = requestAnimationFrame(animate);
 
     // Throttled resize handler for better performance
     let resizeTimeout;
