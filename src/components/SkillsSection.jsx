@@ -68,7 +68,7 @@ export const SkillsSection = () => {
           {filteredSkills.map((skill, key) => (
             <div
               key={key}
-              className="glass-card"
+              className="glass-card card-hover"
             >
               <div className="text-left mb-4">
                 <h3 className="font-semibold text-lg"> {skill.name}</h3>

@@ -51,6 +51,7 @@ export const ProjectsSection = () => {
             <div
               key={project.id}
               className="group glass-card card-hover overflow-hidden cursor-pointer"
+              onClick={() => window.open(project.id === 1 ? project.demoUrl : project.githubUrl, '_blank')}
             >
               <div className="h-60 overflow-hidden">
                 <img
