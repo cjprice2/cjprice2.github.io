@@ -4,29 +4,29 @@ const projects = [
   {
     id: 1,
     title: "Web Graphics Portfolio",
-    description: "A portfolio of my web graphics projects from my computer graphics class.",
+    description: "Interactive portfolio featuring 15 computer graphics scenes with Canvas API and Three.js. Includes custom GLSL shaders for advanced effects, multi-pass rendering for real-time reflections, and a complete 3D racing game with physics-based mechanics.",
     image: "/projects/project1.png",
-    tags: ["Canvas API", "Three.js", "WebGL", "SVG"],
+    tags: ["Canvas API", "Three.js", "WebGL", "GLSL", "SVG"],
     demoUrl: "https://cjprice2.github.io/graphics-portfolio/",
     githubUrl: "https://github.com/cjprice2/graphics-portfolio",
   },
   {
     id: 2,
-    title: "Actor Shortest Path Application",
+    title: "Celebrity Shortest Path Finder",
     description:
-      "A visualizer for the shortest path between two actors based on movies they have appeared in together.",
+      "A full-stack web app that computes the shortest connections between celebrities using IMDb datasets and TMDb API for celebrity photos, \
+      built with Java, Spring Boot, Next.js, PostgreSQL, Docker, and AWS, handling over 60M+ relationships with scalable deployment.",
     image: "/projects/project2.png",
-    tags: ["Java", "JavaFX"],
-    demoUrl: "#",
+    tags: ["Spring Boot", "Next.js", "PostgreSQL", "Docker", "AWS"],
+    demoUrl: "https://dmzjprts9js4l.cloudfront.net/",
     githubUrl: "https://github.com/cjprice2/ActorShortestPathApp",
   },
   {
     id: 3,
     title: "Personal Website (This one!)",
-    description:
-      "My personal website built with React + Vite and Tailwind CSS. Created the background animation with Canvas API.",
+    description: "A modern, responsive personal website built with React + Vite and Tailwind CSS. Features a dynamic animated background created with Canvas API, smooth scrolling navigation, and interactive project showcase. Deployed with GitHub Pages.",
     image: "/projects/project3.png",
-    tags: ["React", "Vite", "Tailwind CSS", "Canvas API"],
+    tags: ["React + Vite", "Tailwind CSS", "Canvas API"],
     demoUrl: "#",
     githubUrl: "https://github.com/cjprice2/cjprice2.github.io",
   },
@@ -50,18 +50,18 @@ export const ProjectsSection = () => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group glass-card card-hover overflow-hidden cursor-pointer"
-              onClick={() => window.open(project.id === 1 ? project.demoUrl : project.githubUrl, '_blank')}
+              className="group glass-card card-hover overflow-hidden cursor-pointer flex flex-col"
+              onClick={() => window.open(project.id === 1 ? project.demoUrl : project.id === 2 ? project.demoUrl : project.githubUrl, '_blank')}
             >
               <div className="h-60 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
 
-              <div className="">
+              <div className="flex flex-col flex-grow">
                 <div className="flex flex-wrap gap-2 mb-4 mt-4">
                   {project.tags.map((tag) => (
                     <span
@@ -74,12 +74,12 @@ export const ProjectsSection = () => {
                 </div>
 
                 <h3 className="text-xl font-semibold mb-2"> {project.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4">
+                <p className="text-muted-foreground text-sm mb-4 flex-grow">
                   {project.description}
                 </p>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center mt-auto">
                   <div className="flex space-x-3">
-                    {project.id !== 2 && project.id !== 3 && project.demoUrl && (
+                    {project.id !== 3 && project.demoUrl && (
                       <a
                         href={project.demoUrl}
                         target="_blank"

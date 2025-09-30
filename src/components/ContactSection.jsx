@@ -76,11 +76,11 @@ import {
                   <div className="p-3 rounded-full bg-primary/10">
                     <Mail className="h-6 w-6 text-primary" />{" "}
                   </div>
-                  <div className="text-left">
+                  <div className="text-left flex-1 min-w-0">
                     <h4 className="font-medium"> Email</h4>
                     <a
                       href="mailto:colinjamesprice04@gmail.com"
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                      className="text-muted-foreground hover:text-primary transition-colors text-xs xs:text-sm sm:text-base"
                     >
                       colinjamesprice04@gmail.com
                     </a>
