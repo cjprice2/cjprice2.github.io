@@ -3,33 +3,33 @@ import { cn } from "@/lib/utils";
 
 const skills = [
   // Frontend
-  { name: "HTML/CSS", level: 95, category: "frontend" },
-  { name: "JavaScript", level: 90, category: "frontend" },
-  { name: "React", level: 90, category: "frontend" },
-  { name: "Tailwind CSS", level: 85, category: "frontend" },
-  { name: "Next.js", level: 65, category: "frontend" },
-  { name: "Three.js", level: 85, category: "frontend" },
-  { name: "Canvas API", level: 90, category: "frontend" },
+  { name: "HTML/CSS", level: 85, category: "frontend" },
+  { name: "JavaScript", level: 80, category: "frontend" },
+  { name: "React", level: 75, category: "frontend" },
+  { name: "Tailwind CSS", level: 70, category: "frontend" },
+  { name: "Next.js", level: 50, category: "frontend" },
+  { name: "Three.js", level: 75, category: "frontend" },
+  { name: "Canvas API", level: 75, category: "frontend" },
 
   // Backend
-  { name: "Flask", level: 75, category: "backend" },
-  { name: "REST APIs", level: 80, category: "backend" },
-  { name: "Python", level: 90, category: "backend" },
-  { name: "Java", level: 85, category: "backend" },
-  { name: "PostgreSQL", level: 75, category: "backend" },
+  { name: "Flask", level: 65, category: "backend" },
+  { name: "REST APIs", level: 70, category: "backend" },
+  { name: "Python", level: 80, category: "backend" },
+  { name: "Java", level: 70, category: "backend" },
+  { name: "PostgreSQL", level: 60, category: "backend" },
 
   // Data Science
-  { name: "Pandas", level: 85, category: "data" },
-  { name: "Scikit-learn", level: 75, category: "data" },
-  { name: "Matplotlib", level: 85, category: "data" },
-  { name: "R", level: 90, category: "data" },
-  { name: "Jupyter", level: 85, category: "data" },
+  { name: "Pandas", level: 70, category: "data" },
+  { name: "Scikit-learn", level: 60, category: "data" },
+  { name: "Matplotlib", level: 65, category: "data" },
+  { name: "R", level: 55, category: "data" },
+  { name: "Jupyter", level: 75, category: "data" },
 
   // Tools
-  { name: "Git/GitHub", level: 90, category: "tools" },
-  { name: "Docker", level: 80, category: "tools" },
-  { name: "Figma", level: 95, category: "tools" },
-  { name: "VS Code", level: 95, category: "tools" }
+  { name: "Git/GitHub", level: 80, category: "tools" },
+  { name: "Docker", level: 70, category: "tools" },
+  { name: "Figma", level: 70, category: "tools" },
+  { name: "VS Code", level: 85, category: "tools" }
 ];
 
 const categories = ["all", "frontend", "backend", "data", "tools"];

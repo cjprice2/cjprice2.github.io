@@ -6,8 +6,21 @@ export const NetworkBackground = () => {
   const nodesRef = useRef([]);
   const animationRef = useRef();
   const lastTimeRef = useRef(0);
+  const isScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef(null);
+  const isMobileRef = useRef(false);
 
   useEffect(() => {
+    // Detect mobile device
+    const detectMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      isMobileRef.current = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent) ||
+                           ('ontouchstart' in window) ||
+                           (navigator.maxTouchPoints > 0);
+    };
+    
+    detectMobile();
+    
     // Check theme
     const checkTheme = () => {
       const isDarkMode = document.documentElement.classList.contains('dark');
@@ -140,6 +153,7 @@ export const NetworkBackground = () => {
     // Update node positions
     const updateNodes = (deltaTime) => {
       const nodes = nodesRef.current;
+      // Frame-rate independent scaling - same for all devices
       const frameScale = deltaTime * 144;
       
       // Check for nodes that are too close and make them go opposite directions
@@ -201,6 +215,12 @@ export const NetworkBackground = () => {
 
     // Draw the network
     const draw = () => {
+      // Mobile optimization: use imageSmoothingEnabled for better performance
+      if (isMobileRef.current) {
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'low';
+      }
+      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       const nodeColor = isDark ? 'rgba(170, 170, 170, 0.5)' : 'rgba(200, 200, 230, 0.7)';
@@ -213,8 +233,12 @@ export const NetworkBackground = () => {
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = 1;
       
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
+      // Mobile optimization: reduce connection calculations during scrolling
+      const shouldOptimizeConnections = isMobileRef.current && isScrollingRef.current;
+      const maxConnections = shouldOptimizeConnections ? Math.min(nodes.length, 20) : nodes.length;
+      
+      for (let i = 0; i < maxConnections; i++) {
+        for (let j = i + 1; j < maxConnections; j++) {
           const nodeA = nodes[i];
           const nodeB = nodes[j];
           
@@ -246,13 +270,45 @@ export const NetworkBackground = () => {
       }
       // Seconds elapsed; clamp to avoid huge jumps when tab is inactive (RAF throttles)
       let deltaTime = (currentTime - lastTimeRef.current) / 1000;
-      const MAX_DELTA = 0.05; // cap at ~50 ms (≈20 fps). Larger gaps are treated as MAX_DELTA
+      const MAX_DELTA = 0.033; // cap at ~33ms (≈30fps) to prevent huge jumps when tab becomes active
       if (deltaTime > MAX_DELTA) deltaTime = MAX_DELTA;
       lastTimeRef.current = currentTime;
 
       updateNodes(deltaTime);
       draw();
       animationRef.current = requestAnimationFrame(animate);
+    };
+
+    // Handle scroll events for mobile optimization
+    const handleScrollStart = () => {
+      isScrollingRef.current = true;
+      // Clear any existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+
+    const handleScrollEnd = () => {
+      // Use a timeout to detect when scrolling has stopped
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 150); // 150ms delay to detect scroll end
+    };
+
+    // Mobile-specific scroll handling
+    const handleTouchStart = () => {
+      if (isMobileRef.current) {
+        handleScrollStart();
+      }
+    };
+
+    const handleTouchEnd = () => {
+      if (isMobileRef.current) {
+        handleScrollEnd();
+      }
     };
 
     resizeCanvas();
@@ -266,11 +322,47 @@ export const NetworkBackground = () => {
       resizeTimeout = setTimeout(resizeCanvas, 100);
     };
 
+    // Add event listeners with passive options for better mobile performance
     window.addEventListener('resize', handleResize);
+    
+    // Scroll and touch event listeners for mobile optimization
+    window.addEventListener('scroll', handleScrollStart, { passive: true });
+    window.addEventListener('scroll', handleScrollEnd, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    
+    // Additional mobile-specific events
+    if (isMobileRef.current) {
+      window.addEventListener('touchmove', handleScrollStart, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          // Pause animation when tab is hidden to save battery
+          if (animationRef.current) {
+            cancelAnimationFrame(animationRef.current);
+          }
+        } else {
+          // Resume animation when tab becomes visible
+          if (!animationRef.current) {
+            lastTimeRef.current = performance.now();
+            animationRef.current = requestAnimationFrame(animate);
+          }
+        }
+      });
+    }
     
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScrollStart);
+      window.removeEventListener('scroll', handleScrollEnd);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('touchmove', handleTouchStart);
+      document.removeEventListener('visibilitychange', () => {});
+      
       clearTimeout(resizeTimeout);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
@@ -281,7 +373,9 @@ export const NetworkBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 -z-10 pointer-events-none"
-      style={{ background: 'transparent' }}
+      style={{ 
+        background: 'transparent'
+      }}
     />
   );
 }; 
