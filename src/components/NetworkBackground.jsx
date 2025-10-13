@@ -279,10 +279,12 @@ export const NetworkBackground = () => {
           animationRef.current = null;
         }
       } else {
-        if (!animationRef.current) {
-          lastTimeRef.current = performance.now();
-          animationRef.current = requestAnimationFrame(animate);
+        // Always restart animation when tab becomes visible
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
         }
+        lastTimeRef.current = performance.now();
+        animationRef.current = requestAnimationFrame(animate);
       }
     });
     
