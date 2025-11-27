@@ -304,7 +304,10 @@ export const NetworkBackground = () => {
       ref={canvasRef}
       className="fixed inset-0 -z-10 pointer-events-none"
       style={{ 
-        background: 'transparent'
+        background: 'transparent',
+        // Mobile scroll optimization - force GPU layer without heavy transforms
+        transform: 'translate3d(0, 0, 0)',
+        backfaceVisibility: 'hidden'
       }}
     />
   );
