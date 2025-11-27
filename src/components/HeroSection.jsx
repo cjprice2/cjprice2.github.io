@@ -9,13 +9,13 @@ export const HeroSection = () => {
       <div className="container max-w-4xl mx-auto text-center z-10">
         <div className="glass-card space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="opacity-0 animate-fade-in"> Hi, I'm</span>
+            <span className="opacity-0 animate-fade-in text-foreground"> Hi, I'm</span>
             <span className="whitespace-nowrap">
-              <span className="opacity-0 animate-fade-in-delay-1 text-primary">
+              <span className="opacity-0 animate-fade-in-delay-1 text-foreground font-extrabold">
                 {" "}
                 Colin
               </span>
-              <span className="opacity-0 animate-fade-in-delay-2 text-primary">
+              <span className="opacity-0 animate-fade-in-delay-2 text-foreground font-extrabold">
                 {" "}
                 Price
               </span>

@@ -51,31 +51,31 @@
 
 @layer base {
   :root {
-    --background: 0 0% 96%;
+    --background: 0 0% 88%;
     --foreground: 0 0% 0%;
     
-    --card: 0 0% 98%;
+    --card: 0 0% 92%;
 
-    --primary: 220 40% 60%;
+    --primary: 0 0% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 85% 60%;
-    --secondary-foreground: 200 85% 15%;
+    --secondary: 0 0% 40%;
+    --secondary-foreground: 0 0% 15%;
 
     --border: 0 0% 0% / 0.6;
   }
 
   .dark {
-    --background: 220 27% 12%;
+    --background: 0 0% 8%;
     --foreground: 0 0% 100%;
 
-    --card: 222 30% 15%;
+    --card: 0 0% 12%;
 
-    --primary: 220 40% 60%;
+    --primary: 0 0% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 100% 70%;
-    --secondary-foreground: 200 85% 15%;
+    --secondary: 0 0% 50%;
+    --secondary-foreground: 0 0% 15%;
 
     --border: 0 0% 100% / 0.6;
   }
@@ -118,7 +118,7 @@
 
 @utility text-glow {
   @apply relative;
-  text-shadow: 0 0 10px rgba(168, 206, 218, 0.3);
+  text-shadow: 0 0 10px rgba(128, 128, 128, 0.3);
 }
 
 @utility text-secondary {
@@ -134,10 +134,13 @@
 }
 
 @utility nice-button {
-  @apply px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium
-         transition-all duration-300 hover:shadow-[0_0_20px_hsl(220_40%_60%/0.6)]
-         shadow-[0_0_10px_hsl(220_40%_60%/0.3)]
-         hover:brightness-110;
+  @apply px-6 py-3 rounded-lg font-medium
+         border-2 border-foreground/40
+         bg-foreground/10 dark:bg-white/15
+         text-foreground shadow-md
+         transition-all duration-300
+         hover:bg-foreground/20 dark:hover:bg-white/25
+         hover:border-foreground/60 dark:hover:border-white/60 hover:shadow-lg;
 }
 
 @utility glass-card {

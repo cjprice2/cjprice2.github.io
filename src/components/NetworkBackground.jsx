@@ -203,9 +203,9 @@ export const NetworkBackground = () => {
     // Draw the network
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      const nodeColor = isDark ? 'rgba(170, 170, 170, 0.5)' : 'rgba(200, 200, 230, 0.7)';
-      const lineColor = isDark ? 'rgba(150, 150, 150, 0.35)' : 'rgba(200, 200, 230, 0.5)';
+    
+      const nodeColor = isDark ? 'rgba(170, 170, 170, 0.5)' : 'rgba(120, 120, 120, 0.5)';
+      const lineColor = isDark ? 'rgba(150, 150, 150, 0.35)' : 'rgba(100, 100, 100, 0.3)';
       
       const nodes = nodesRef.current;
       const { connectionDistance } = getResponsiveValues(canvas.width, canvas.height);

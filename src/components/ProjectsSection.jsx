@@ -23,12 +23,12 @@ const projects = [
   },
   {
     id: 3,
-    title: "Personal Website (This one!)",
-    description: "A modern, responsive personal website built with React + Vite and Tailwind CSS. Features a dynamic animated background created with Canvas API, smooth scrolling navigation, and interactive project showcase. Deployed with GitHub Pages.",
+    title: "BuckyBot",
+    description: "AI-powered course companion for UW-Madison that won 2nd place at a Google AI Hackathon. Chrome Extension that analyzes DARS transcripts and delivers personalized course recommendations through natural language interaction. Features contextual recommendations, real-time grade difficulty scoring via MadGrades API, professor ratings from RateMyProfessor, and visual degree progress tracking. Built with Python/Flask backend, DeepSeek LLM, and deployed on AWS Lambda.",
     image: "/projects/project3.png",
-    tags: ["React + Vite", "Tailwind CSS", "Canvas API"],
-    demoUrl: "#",
-    githubUrl: "https://github.com/cjprice2/cjprice2.github.io",
+    tags: ["Python", "DeepSeek LLM", "Chrome Extension", "AWS Lambda", "JavaScript"],
+    demoUrl: "https://chromewebstore.google.com/detail/buckybot-smart-course-sea/bjiannnhcmnfhkndblagpkpmdcmglffl",
+    githubUrl: null,
   },
 ];
 
@@ -38,7 +38,7 @@ export const ProjectsSection = () => {
       <div className="container mx-auto max-w-8xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           {" "}
-          Featured <span className="text-primary"> Projects </span>
+          Featured <span className="text-foreground"> Projects </span>
         </h2>
 
         <p className="text-center text-foreground mb-12 max-w-2xl mx-auto">
@@ -50,10 +50,10 @@ export const ProjectsSection = () => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group glass-card card-hover overflow-hidden cursor-pointer flex flex-col"
-              onClick={() => window.open(project.id === 1 ? project.demoUrl : project.id === 2 ? project.demoUrl : project.githubUrl, '_blank')}
+              className="group glass-card card-hover overflow-hidden cursor-pointer flex flex-col h-full"
+              onClick={() => window.open(project.demoUrl || project.githubUrl, '_blank')}
             >
-              <div className="h-60 overflow-hidden">
+              <div className="h-48 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -61,8 +61,8 @@ export const ProjectsSection = () => {
                 />
               </div>
 
-              <div className="flex flex-col flex-grow">
-                <div className="flex flex-wrap gap-2 mb-4 mt-4">
+              <div className="flex flex-col flex-grow p-6">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
                     <span
                       key={`${project.id}-${tag}`}
@@ -73,13 +73,13 @@ export const ProjectsSection = () => {
                   ))}
                 </div>
 
-                <h3 className="text-xl font-semibold mb-2"> {project.title}</h3>
+                <h3 className="text-xl font-semibold mb-3"> {project.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4 flex-grow">
                   {project.description}
                 </p>
                 <div className="flex justify-between items-center mt-auto">
                   <div className="flex space-x-3">
-                    {project.id !== 3 && project.demoUrl && (
+                    {project.demoUrl && (
                       <a
                         href={project.demoUrl}
                         target="_blank"
@@ -89,14 +89,16 @@ export const ProjectsSection = () => {
                         <ExternalLink size={20} />
                       </a>
                     )}
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Github size={20} />
-                    </a>
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Github size={20} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

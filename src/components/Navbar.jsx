@@ -6,7 +6,6 @@ import { ThemeToggle } from "./ThemeToggle";
 const navItems = [
   { name: "Home", href: "#hero" },
   { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ];
@@ -34,10 +33,10 @@ export const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <a
-            className="text-xl font-bold text-primary flex items-center"
+            className="text-xl font-bold flex items-center"
             href="#hero"
           >
-            <span className="relative z-10 text-glow text-primary"> Colin Price </span>
+            <span className="relative z-10 text-foreground"> Colin Price </span>
           </a>
 
           {/* desktop nav */}
