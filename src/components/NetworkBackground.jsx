@@ -80,8 +80,22 @@ export const NetworkBackground = () => {
       const oldWidth = canvas.width;
       const oldHeight = canvas.height;
       
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      // Use visualViewport if available (more stable on mobile)
+      const viewportWidth = window.visualViewport?.width || window.innerWidth;
+      const viewportHeight = window.visualViewport?.height || window.innerHeight;
+      
+      // On mobile, ignore height-only changes (address bar hiding/showing)
+      const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent) ||
+                       ('ontouchstart' in window) ||
+                       (navigator.maxTouchPoints > 0);
+      
+      if (isMobile && oldWidth === viewportWidth && oldWidth > 0) {
+        // Only height changed (likely address bar), ignore it
+        return;
+      }
+      
+      canvas.width = viewportWidth;
+      canvas.height = viewportHeight;
       
       const { nodeCount } = getResponsiveValues(canvas.width, canvas.height);
       
@@ -271,6 +285,11 @@ export const NetworkBackground = () => {
     // Add event listeners
     window.addEventListener('resize', handleResize);
     
+    // Use visualViewport for more stable mobile handling
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize);
+    }
+    
     // Pause animation when tab is hidden to save battery
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
@@ -290,6 +309,9 @@ export const NetworkBackground = () => {
     
     return () => {
       window.removeEventListener('resize', handleResize);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleResize);
+      }
       document.removeEventListener('visibilitychange', () => {});
       
       clearTimeout(resizeTimeout);
@@ -304,10 +326,7 @@ export const NetworkBackground = () => {
       ref={canvasRef}
       className="fixed inset-0 -z-10 pointer-events-none"
       style={{ 
-        background: 'transparent',
-        // Mobile scroll optimization - force GPU layer without heavy transforms
-        transform: 'translate3d(0, 0, 0)',
-        backfaceVisibility: 'hidden'
+        background: 'transparent'
       }}
     />
   );
