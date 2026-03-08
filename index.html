@@ -2,18 +2,92 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <title>Colin Price Portfolio Website</title>
-    <!-- SEO -->
-    <meta name="description" content="Portfolio website showcasing projects, skills, and contact information for Colin Price, UW-Madison CS & DS student." />
-    <meta name="keywords" content="Colin Price, Colin Price portfolio, Colin Price website, software engineer, web developer, frontend developer, full stack developer, React developer, JavaScript, Python, portfolio, web development projects, software development, personal website, tech portfolio, UW-Madison, student, Colin James Price, University of Wisconsin-Madison, Colin Price UW-Madison" />
-    <link rel="canonical" href="https://cjprice2.github.io/" />
+    <title>Colin Price</title>
+    <meta
+      name="description"
+      content="Personal site for Colin Price with sections for about, experience, and projects."
+    />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <main class="page">
+      <header>
+        <p class="name">Colin Price</p>
+        <p class="tagline">Developer & Student | Interested in BI, Data Visualization, Web Graphics, and Mobile Development</p>
+      </header>
+
+      <nav class="tabs" aria-label="Primary sections" role="tablist">
+        <button class="tab active" role="tab" aria-selected="true" aria-controls="about" id="tab-about" data-target="about" type="button">About</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="experience" id="tab-experience" data-target="experience" type="button">Experience</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="projects" id="tab-projects" data-target="projects" type="button">Projects</button>
+      </nav>
+
+      <div class="tab-panels">
+        <section id="about" class="section" role="tabpanel" aria-labelledby="tab-about">
+          <p>
+            I am a Computer and Data Science student currently working as a Power BI
+            Developer Intern at Quartz Health Solutions. Most of my work is around
+            building dashboards, improving report usability, and translating business
+            questions into clear, actionable metrics.
+          </p>
+          <p>
+            Outside of BI, I like building projects in web graphics and mobile
+            development because they push me to think about performance and user
+            experience from different angles.
+          </p>
+          <p>
+            On my free time, I enjoy watching and playing sports, biking, playing video games, and spending time with friends and family.
+          </p>
+          <div class="about-contacts">
+            <p>
+              Contact: <a href="mailto:colinjamesprice04@gmail.com">colinjamesprice04@gmail.com</a>
+            </p>
+            <p>
+              LinkedIn: <a href="https://www.linkedin.com/in/colinprice04" target="_blank" rel="noreferrer">linkedin.com/in/colinprice04</a>
+            </p>
+            <p>
+              GitHub: <a href="https://github.com/cjprice2" target="_blank" rel="noreferrer">github.com/cjprice2</a>
+            </p>
+          </div>
+        </section>
+
+        <section id="experience" class="section" role="tabpanel" aria-labelledby="tab-experience" hidden>
+          <div class="timeline">
+            <article class="timeline-item">
+              <p class="experience-title">Power BI Developer Intern</p>
+              <p class="experience-company">Quartz Health Solutions</p>
+              <p class="experience-dates">May 2025 - Present</p>
+            </article>
+
+            <article class="timeline-item">
+              <p class="experience-title">Role Title</p>
+              <p class="experience-company">Company Name</p>
+              <p class="experience-dates">Month Year - Month Year</p>
+            </article>
+
+            <article class="timeline-item">
+              <p class="experience-title">Role Title</p>
+              <p class="experience-company">Company Name</p>
+              <p class="experience-dates">Month Year - Month Year</p>
+            </article>
+
+            <article class="timeline-item">
+              <p class="experience-title">Role Title</p>
+              <p class="experience-company">Company Name</p>
+              <p class="experience-dates">Month Year - Month Year</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="projects" class="section" role="tabpanel" aria-labelledby="tab-projects" hidden>
+          <p>
+            Add 2-4 projects with links, short context, and specific technical decisions
+            you made.
+          </p>
+        </section>
+      </div>
+    </main>
+    <script src="./script.js"></script>
   </body>
 </html>
