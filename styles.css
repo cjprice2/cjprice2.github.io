@@ -26,14 +26,19 @@ body {
   min-height: 100%;
 }
 
-body {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
+html {
   background:
     radial-gradient(circle at 12% 18%, rgba(73, 114, 167, 0.28), transparent 42%),
     radial-gradient(circle at 86% 84%, rgba(26, 142, 125, 0.22), transparent 40%),
     linear-gradient(135deg, var(--page-bg-start) 0%, var(--page-bg-mid) 46%, var(--page-bg-end) 100%);
+  background-color: var(--page-bg-start);
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: transparent;
   color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
