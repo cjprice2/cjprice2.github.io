@@ -1,23 +1,13 @@
-# Personal Website (Static)
+# Welcome to my Personal Website!
 
-This repository is a pure static site with no framework or build tooling.
+This website contains information about myself \:D
 
-## Stack
+## Tech
 
 - HTML
 - CSS
+- JavaScript
 
-## Files
+## How to run
 
-- `index.html`
-- `styles.css`
-
-## Run Locally
-
-Open `index.html` directly in your browser.
-
-## Notes
-
-- Layout includes a centered dark panel with your name in the top-left.
-- Tabs are included for About, Experience, Projects, and Goals.
-- Content blocks are intentionally minimal so you can edit quickly.
+Open `index.html` in a browser. That's all \:)

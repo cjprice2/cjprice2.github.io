@@ -6,6 +6,14 @@
     <title>Colin Price</title>
     <meta
       name="description"
+      content="Colin Price's personal website."
+    />
+    <link rel="canonical" href="https://cjprice2.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cjprice2.github.io/" />
+    <meta property="og:title" content="Colin Price" />
+    <meta
+      property="og:description"
       content="Personal site for Colin Price with sections for about, experience, and projects."
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -14,7 +22,7 @@
     <main class="page">
       <header>
         <p class="name">Colin Price</p>
-        <p class="tagline">Developer & Student | Interested in BI, Data Visualization, Web Graphics, and Mobile Development</p>
+        <p class="tagline">Developer & Student | Interested in Business Intelligence, Data Visualization, Web Graphics, and Mobile Development</p>
       </header>
 
       <nav class="tabs" aria-label="Primary sections" role="tablist">
@@ -26,13 +34,11 @@
       <div class="tab-panels">
         <section id="about" class="section" role="tabpanel" aria-labelledby="tab-about">
           <p>
-            I am a Computer and Data Science student currently working as a Power BI
-            Developer Intern at Quartz Health Solutions. Most of my work is around
-            building dashboards, improving report usability, and translating business
-            questions into clear, actionable metrics.
+            I am a Computer and Data Science student at UW-Madison, currently working as a Power BI
+            Developer Intern at Quartz Health Solutions and a Library IT Technician Advanced at the UW-Madison Libraries.
           </p>
           <p>
-            Outside of BI, I like building projects in web graphics and mobile
+            Outside of my professional work, I like building projects in web graphics and mobile
             development because they push me to think about performance and user
             experience from different angles.
           </p>
@@ -61,30 +67,42 @@
             </article>
 
             <article class="timeline-item">
-              <p class="experience-title">Role Title</p>
-              <p class="experience-company">Company Name</p>
-              <p class="experience-dates">Month Year - Month Year</p>
+              <p class="experience-title">Library IT Technician Advanced</p>
+              <p class="experience-company">UW-Madison Libraries</p>
+              <p class="experience-dates">January 2025 - Present</p>
             </article>
 
             <article class="timeline-item">
-              <p class="experience-title">Role Title</p>
-              <p class="experience-company">Company Name</p>
-              <p class="experience-dates">Month Year - Month Year</p>
-            </article>
-
-            <article class="timeline-item">
-              <p class="experience-title">Role Title</p>
-              <p class="experience-company">Company Name</p>
-              <p class="experience-dates">Month Year - Month Year</p>
+              <p class="experience-title">Peer Mentor - CS559 Computer Graphics</p>
+              <p class="experience-company">UW-Madison</p>
+              <p class="experience-dates">September 2025 - December 2025</p>
             </article>
           </div>
         </section>
 
         <section id="projects" class="section" role="tabpanel" aria-labelledby="tab-projects" hidden>
-          <p>
-            Add 2-4 projects with links, short context, and specific technical decisions
-            you made.
-          </p>
+          <ul class="projects-list">
+            <li>
+              <span class="project-name">MotionVault</span>
+              <span class="project-summary">Android app for capturing and sharing human motion data, designed to streamline data collection for human robotics researchers.</span>
+              <a href="https://github.com/Mason-Baloun/MotionVault_Prototype" target="_blank" rel="noreferrer">Code</a>
+            </li>
+            <li>
+              <span class="project-name">Inventory Tracking App</span>
+              <span class="project-summary">Web app for tracking technology inventory and streamlining low quantity alerts for UW-Madison libraries.</span>
+              <span>Demo coming soon.</span>
+            </li>
+            <li>
+              <span class="project-name">BuckyBot</span>
+              <span class="project-summary">UW-Madison course search assistant AI agent, achieved 2nd place in a 24-hour Google Startup Hackathon. </span>
+              <a href="https://www.youtube.com/watch?v=k-6YXs2jMvA" target="_blank" rel="noreferrer">Live Demo</a>
+            </li>
+            <li>
+              <span class="project-name">Computer Graphics Portfolio</span>
+              <span class="project-summary">Portfolio of various 2D and 3D web graphics projects, primarily built with Canvas API and Three.JS.</span>
+              <a href="https://github.com/cjprice2/graphics-portfolio" target="_blank" rel="noreferrer">Code</a>
+            </li>
+          </ul>
         </section>
       </div>
     </main>
