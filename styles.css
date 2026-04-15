@@ -26,6 +26,11 @@ body {
 }
 
 html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html {
   background:
     radial-gradient(circle at 12% 18%, rgba(73, 114, 167, 0.28), transparent 42%),
     radial-gradient(circle at 86% 84%, rgba(26, 142, 125, 0.22), transparent 40%),
