@@ -11,7 +11,6 @@
   --surface-alt: #2a2f36;
   --border-color: #3a4048;
   --text-primary: #f3f4f6;
-  --title-white: #ffffff;
   --text-secondary: #c5c9d0;
   --text-muted: #9aa3b1;
   --text-soft: #aeb6c1;
@@ -127,18 +126,12 @@ body {
   border: 1px solid var(--border-color);
   border-top: 0;
   padding: 1.25rem;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .section {
   margin: 0;
-}
-
-.section h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
 }
 
 .section p {
@@ -151,32 +144,29 @@ body {
 }
 
 .about-contacts {
-  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
-.timeline {
-  --timeline-dot-x: 0.45rem;
-  --timeline-dot-size: var(--bullet-size);
-  position: relative;
-}
-
-.timeline-item {
+.timeline-item,
+.projects-list li {
   position: relative;
   padding-left: 1.5rem;
   margin-bottom: 1.2rem;
 }
 
-.timeline-item:last-child {
+.timeline-item:last-child,
+.projects-list li:last-child {
   margin-bottom: 0;
 }
 
-.timeline-item::before {
+.timeline-item::before,
+.projects-list li::before {
   content: "";
   position: absolute;
-  left: var(--timeline-dot-x);
+  left: 0.45rem;
   top: 0.35rem;
-  width: var(--timeline-dot-size);
-  height: var(--timeline-dot-size);
+  width: var(--bullet-size);
+  height: var(--bullet-size);
   border-radius: 50%;
   background: var(--accent);
   transform: translateX(-50%);
@@ -189,13 +179,9 @@ body {
   line-height: 1.2;
 }
 
-.experience-title,
-.project-name {
-  color: #ffffff !important;
-  font-weight: 700;
-}
-
 .experience-title {
+  color: #ffffff;
+  font-weight: 700;
   font-size: 1rem;
   margin-bottom: 0.15rem;
 }
@@ -215,35 +201,6 @@ body {
   margin: 0;
   padding-left: 0;
   list-style: none;
-}
-
-.projects-list li {
-  position: relative;
-  padding-left: 1.5rem;
-  margin-bottom: 0.75rem;
-  color: var(--text-secondary);
-}
-
-.projects-list li::before {
-  content: "";
-  position: absolute;
-  left: 0.45rem;
-  top: 0.45rem;
-  width: var(--bullet-size);
-  height: var(--bullet-size);
-  border-radius: 50%;
-  background: var(--accent);
-  transform: translateX(-50%);
-}
-
-.project-name {
-  margin-right: 0.5rem;
-}
-
-.project-summary {
-  display: block;
-  margin: 0.15rem 0 0.2rem;
-  color: var(--text-secondary);
 }
 
 .section a {
